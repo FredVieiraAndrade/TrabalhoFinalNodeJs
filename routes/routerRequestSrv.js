@@ -46,10 +46,10 @@ routerRequestSrv.get('/os/:id', checkToken, (req, res, next) => {
 routerRequestSrv.post('/os', checkToken, (req, res, next) => {
     knex('ordemServico')
         .insert({
-            data: req.body.data,
+            data_servico: req.body.data_servico,
             id_pet: req.body.id_pet,
             id_servico: req.body.id_servico,
-            quantidade: req.body.quantidade,
+            quantidade_servico: req.body.quantidade_servico,
             observacao: req.body.observacao
         }, ['id'])
         .then(result => {
@@ -64,10 +64,10 @@ routerRequestSrv.post('/os', checkToken, (req, res, next) => {
 routerRequestSrv.put('/os/:id', checkToken, isAdmin, (req, res, next) => {
     knex('ordemServico')
         .update({
-            data: req.body.data,
+            data_servico: req.body.data_servico,
             id_pet: req.body.id_pet,
             id_servico: req.body.id_servico,
-            quantidade: req.body.quantidade,
+            quantidade_servico: req.body.quantidade_servico,
             observacao: req.body.observacao
         })
         .where({ id: req.params.id })
@@ -90,6 +90,5 @@ routerRequestSrv.delete('/pets/:id', checkToken, isAdmin, (req, res) => {
             res.status(404).json({ message: 'Falha ao remover ordem de serviço.' })
         })
 })
-
 
 module.exports = routerRequestSrv

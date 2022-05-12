@@ -41,8 +41,9 @@ routerSrv.get('/servicos/:id', checkToken, (req, res, next) => {
 
 routerSrv.post('/servicos', checkToken, (req, res, next) => {
     knex('servico')
-        .insert ({  tipo: req.body.tipo, 
-                    valor: req.body.valor
+        .insert ({  
+            tipo_servico: req.body.tipo_servico, 
+            valor_servico: req.body.valor_servico
              },['id'])
         .then (result => {
             let novoProd = result[0];
@@ -55,8 +56,8 @@ routerSrv.post('/servicos', checkToken, (req, res, next) => {
 
 routerSrv.put('/servicos/:id', checkToken, isAdmin, (req, res, next) => {
     knex('servico')
-        .update ({ tipo: req.body.tipo, 
-                   valor: req.body.valor})
+        .update ({ tipo_servico: req.body.tipo_servico, 
+                   valor_servico: req.body.valor_servico})
         .where({ id: req.params.id})
         .then (result => {
             res.status(201).json ({ message: 'Serviço alterado com sucesso'})
