@@ -13,7 +13,7 @@ const knex = require('knex')({
 });
 
 routerRequestSrv.get('/os', checkToken, (req, res, next) => {
-    knex.select('*').from('ordemServico')
+    knex.select('*').from('ordemservico')
         .then(requestSrv => res.status(200).json(requestSrv))
         .catch(err => {
             res.status(500).json({
@@ -24,7 +24,7 @@ routerRequestSrv.get('/os', checkToken, (req, res, next) => {
 
 routerRequestSrv.get('/os/:id', checkToken, (req, res, next) => {
     knex.select('*')
-        .from('ordemServico')
+        .from('ordemservico')
         .where({ id: req.params.id })
         .then(requestSrv => {
             if (requestSrv.length) {
@@ -44,7 +44,7 @@ routerRequestSrv.get('/os/:id', checkToken, (req, res, next) => {
 })
 
 routerRequestSrv.post('/os', checkToken, (req, res, next) => {
-    knex('ordemServico')
+    knex('ordemservico')
         .insert({
             data_servico: req.body.data_servico,
             id_pet: req.body.id_pet,
@@ -62,7 +62,7 @@ routerRequestSrv.post('/os', checkToken, (req, res, next) => {
 })
 
 routerRequestSrv.put('/os/:id', checkToken, isAdmin, (req, res, next) => {
-    knex('ordemServico')
+    knex('ordemservico')
         .update({
             data_servico: req.body.data_servico,
             id_pet: req.body.id_pet,
@@ -79,8 +79,8 @@ routerRequestSrv.put('/os/:id', checkToken, isAdmin, (req, res, next) => {
         })
 })
 
-routerRequestSrv.delete('/pets/:id', checkToken, isAdmin, (req, res) => {
-    knex('ordemServico')
+routerRequestSrv.delete('/os/:id', checkToken, isAdmin, (req, res) => {
+    knex('ordemservico')
         .delete()
         .where({ id: req.params.id })
         .then(result => {
