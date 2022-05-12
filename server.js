@@ -3,7 +3,7 @@ require('dotenv').config()
 const routerSec = require ('./routes/routerSec')
 const routerPet = require ('./routes/routerPet')
 const routerSrv = require ('./routes/routerSrv')
-const routerCxa = require ('./routes/routerCxa')
+const routerRequestSrv = require ('./routes/routerRequestSrv')
 
 const app = express()
 
@@ -17,7 +17,7 @@ app.use ((req, res, next) => {
 
 app.use('/app', express.static('public'))
 app.use('/seguranca', routerSec)
-app.use('/api', routerPet, routerSrv, routerCxa)
+app.use('/api', routerPet, routerSrv, routerRequestSrv)
 
 const PORTA = process.env.PORT || 3000
 app.listen (PORTA, () => {
