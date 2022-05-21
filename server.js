@@ -4,6 +4,9 @@ const routerSec = require ('./routes/routerSec')
 const routerPet = require ('./routes/routerPet')
 const routerSrv = require ('./routes/routerSrv')
 const routerRequestSrv = require ('./routes/routerRequestSrv')
+const swaggerUi = require('swagger-ui-express');
+const  YAML  =  require ( 'yamljs' ) ; 
+const  swaggerDocument  =  YAML.load ( './public/swagger.yaml' ) ;
 
 const app = express()
 
@@ -15,7 +18,7 @@ app.use ((req, res, next) => {
     next()
 })
 
-app.use('/app', express.static('public'))
+app.use('/app', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/seguranca', routerSec)
 app.use('/api', routerPet, routerSrv, routerRequestSrv)
 
